@@ -1,4 +1,6 @@
-https://github.com/tesfayegari
+https://github.com/tesfayegari/Summer2021
+
+Notes goes to this location
 
 Heading (from big to small) H1, h2, h3... h6
 Paragraph P
