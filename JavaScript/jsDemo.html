@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Exercise Class with Bootstrap 4</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>This is a JS Class Demo</h1>
+
+    <p>This is a test Paragraph</p>
+
+    <!-- inline js  -->
+    <!-- <h2 onmouseover="alert('You are doing something');">Some additional H2</h2> -->
+    <h2>Some additional H2</h2>
+  </div>
+
+  <!-- external JS  -->
+  <!-- <script src="custom.js"></script> -->
+  <!-- Internal JS  -->
+  <script>
+    "use strict";
+    var x = 10; // x is a number +, -, /, -, *
+    x = 5;
+
+    var y = "Tesfaye Gari"; //y is a string 
+    console.log(x + y);
+    //  alert(x + y)
+    var name = null;
+
+    var test = "10";
+    //array 
+    var students = ["Tesfaye Gari", "Abby Kassa", "Ahmed Mohamed", "Bayisa Geme", "Fayisa", "Issa", "Muluken"];
+
+    console.log(students);
+
+    console.log(students.length - 1)
+    console.log(students[students.length - 1])
+
+    // var faye = "Fayisa Faji";
+
+    //Object data type
+    var car1 = {
+      make: "BMW",
+      model: "X5",
+      year: "4/4/2021",
+      color: "Blue"
+    }
+    var car2 = {
+      make: "Toyota",
+      model: "Corolla",
+      year: "4/3/2020",
+      color: "Silver"
+    }
+    var person1 = {
+      fullName: "Biniam",
+      phone: "444-555-7654",
+      age: 22,
+      cars: [car1, car2]
+    }
+    var person11 = {
+      fullName: "Biniam",
+      phone: "444-555-7654",
+      age: 22,
+      cars: [{
+        make: "BMW",
+        model: "X5",
+        year: "4/4/2021",
+        color: "Blue"
+      }, {
+        make: "Toyota",
+        model: "Corolla",
+        year: "4/3/2020",
+        color: "Silver"
+      }]
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
