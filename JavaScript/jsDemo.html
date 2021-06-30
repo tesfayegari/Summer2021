@@ -16,6 +16,9 @@
     <h1>This is a JS Class Demo</h1>
 
     <p>This is a test Paragraph</p>
+    <ul id="studetns">
+
+    </ul>
 
     <!-- inline js  -->
     <!-- <h2 onmouseover="alert('You are doing something');">Some additional H2</h2> -->
@@ -57,7 +60,16 @@
       make: "Toyota",
       model: "Corolla",
       year: "4/3/2020",
-      color: "Silver"
+      color: "Silver",
+      numWheels: 4
+    }
+    // JSON 
+    var car2Jason = {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": "4/3/2020",
+      "color": "Silver",
+      "numWheels": 4
     }
     var person1 = {
       fullName: "Biniam",
@@ -81,6 +93,16 @@
         color: "Silver"
       }]
     }
+
+    var a = 19;
+    var b = 20;
+
+    a = b;
+    var c = "20";
+
+    document.getElementById("studetns").innerHTML = "<li>Testing</li>"
+
+
 
 
   </script>
