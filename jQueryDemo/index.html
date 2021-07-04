@@ -20,52 +20,87 @@
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </div>
   <div class="container">
-    <div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail4">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4">Password</label>
-          <input type="password" class="form-control" id="inputPassword4">
-        </div>
+
+    <div id="notification">
+      <div id="success" class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> You are successfully Submitted .
       </div>
-      <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      <div id="error" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Error!</strong> Your form has a required value missing  .
       </div>
-      <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="inputState">State</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">
-            Check me out
-          </label>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
+    <div>   
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fName">First Name</label>
+        <input type="email" class="form-control" id="fName" placeholder="Jon">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lName">Last Name</label>
+        <input type="text" class="form-control" id="lName" placeholder="Do">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Email</label>
+        <input type="email" class="form-control" placeholder="email@emeil.com" id="inputEmail4">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+      <label for="inputAddress2">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>Maryland</option>
+          <option>Virginia</option>
+          <option>District of Colombia</option>
+          <option>Goergia</option>
+          <option>California</option>
+          <option>Texas</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" id="signup" class="btn btn-primary">Sign Up</button>
+    <button type="button" id="cancel" class="btn btn-secondary">Clear</button>
+  </div>
+  <div class="row my-2">
+    <div class="col">
+      <div id="signupResult">
+
+      </div>
+    </div>
+  </div>
   </div>
 
 
@@ -74,6 +109,60 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- custom code start -->
+  <script>
+    $(document).ready(function () {
+      //Your code starts here 
+      // $('#signup').click(function() {
+      //   console.log('Signup button clicked');
+      // });
+      $('#signup').click(signupButton);
+      $('#cancel').click(cancelButton);
+      $('#error').hide();
+      $('#success').hide();
+
+
+      // All custom functions 
+      function signupButton() {
+        console.log('Signup button clicked');
+        var customerInfo = {};
+        customerInfo.FirstName = $('#fName').val()
+        customerInfo.LastName = $('#lName').val();
+        customerInfo.Email = $('#inputEmail4').val();
+        customerInfo.Password = $('#inputPassword4').val();
+        customerInfo.Address = $('#inputAddress').val();
+        customerInfo.Address2 = $('#inputAddress2').val();
+        customerInfo.City = $('#inputCity').val();
+        customerInfo.State = $('#inputState').val();
+        customerInfo.Zip = $('#inputZip').val();
+        customerInfo.CheckOut = $('#gridCheck').prop("checked");
+
+        console.log('Customer info is ', customerInfo);
+
+        $('#signupResult').html('<pre>' + JSON.stringify(customerInfo, undefined, 4) + '<pre>')
+      }
+
+      function cancelButton() {
+        console.log('Cancel button clicked');
+        $('#fName').val('');
+        $('#lName').val('');
+        $('#inputEmail4').val('');
+        $('#inputPassword4').val('');
+        $('#inputAddress').val('');
+        $('#inputAddress2').val('');
+        $('#inputCity').val('');
+        $('#inputState').val('Choose...');
+        $('#inputZip').val('');
+        $('#gridCheck').prop("checked", false);
+        $('#signupResult').html('');
+      }
+
+      //code ends here 
+    });
+  </script>
+  <!-- custom code end -->
+
 </body>
 
 </html>
