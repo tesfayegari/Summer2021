@@ -19,6 +19,7 @@
     <ul id="studetns">
 
     </ul>
+    <h1>Some more h1</h1>
 
     <!-- inline js  -->
     <!-- <h2 onmouseover="alert('You are doing something');">Some additional H2</h2> -->
@@ -100,8 +101,31 @@
     a = b;
     var c = "20";
 
+    // looping through students 
+    for (var index = 0; index < students.length; index = index + 1) {
+      console.log(students[index]);
+    }
+
+    //Short form of above 
+
+    for (var i in students) {
+      console.log(students[i]);
+    }
+
+    //Short form of above 
+    for (var s of students) {
+      console.log(s);
+    }
+
     document.getElementById("studetns").innerHTML = "<li>Testing</li>"
 
+    function toCelsius(fahrenheit) {
+      return (5 / 9) * (fahrenheit - 32);
+    }
+
+    var calculateAge = function (dob) {
+      return 21;
+    }
 
 
 
