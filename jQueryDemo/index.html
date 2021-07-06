@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jQuery Demo examples</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-  .required {
-    color: red;
-    font-weight: bold;
-  }
-</style>
+  <style>
+    .required {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 
 </head>
 
@@ -28,85 +28,93 @@
   <div class="container">
 
     <div id="notification">
-      <div id="success" class="alert alert-success alert-dismissible">
+      <!-- <div id="success" class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Success!</strong> You are successfully Submitted .
-      </div>
-      <div id="error" class="alert alert-danger alert-dismissible">
+      </div> -->
+      <!-- <div id="error" class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <strong>Error!</strong> Your form has a required value missing  .
-      </div>
+      </div> -->
     </div>
-    <div>   
+    <div>
 
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="fName">First Name <span class="required">*</span></label>
-        <input type="email" class="form-control" id="fName" placeholder="Jon">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fName">First Name <span class="required">*</span></label>
+          <input type="email" class="form-control" id="fName" placeholder="Jon">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lName">Last Name <span class="required">*</span></label>
+          <input type="text" class="form-control" id="lName" placeholder="Do">
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="lName">Last Name <span class="required">*</span></label>
-        <input type="text" class="form-control" id="lName" placeholder="Do">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Email <span class="required">*</span></label>
+          <input type="email" class="form-control" placeholder="email@emeil.com" id="inputEmail4">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Password <span class="required">*</span></label>
+          <input type="password" class="form-control" id="inputPassword4">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      </div>
+      <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">State</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>Maryland</option>
+            <option>Virginia</option>
+            <option>District of Colombia</option>
+            <option>Goergia</option>
+            <option>California</option>
+            <option>Texas</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="inputZip">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck">
+          <label class="form-check-label" for="gridCheck">
+            Check me out
+          </label>
+        </div>
+      </div>
+      <button type="submit" id="signup" class="btn btn-primary">Sign Up</button>
+      <button type="button" id="cancel" class="btn btn-secondary">Clear</button>
+    </div>
+    <div class="row my-2">
+      <div class="col">
+        <div id="signupResult">
+
+        </div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Email <span class="required">*</span></label>
-        <input type="email" class="form-control" placeholder="email@emeil.com" id="inputEmail4">
+    <div class="row my-2">
+      <div class="col-12">
+        <button type="submit" id="dispUsers" class="btn btn-primary">Display Users</button>
       </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Password <span class="required">*</span></label>
-        <input type="password" class="form-control" id="inputPassword4">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>Maryland</option>
-          <option>Virginia</option>
-          <option>District of Colombia</option>
-          <option>Goergia</option>
-          <option>California</option>
-          <option>Texas</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" id="signup" class="btn btn-primary">Sign Up</button>
-    <button type="button" id="cancel" class="btn btn-secondary">Clear</button>
-  </div>
-  <div class="row my-2">
-    <div class="col">
-      <div id="signupResult">
+      <div class="col" id="results">
 
       </div>
     </div>
-  </div>
   </div>
 
 
@@ -127,26 +135,91 @@
       $('#cancel').click(cancelButton);
       $('#error').hide();
       $('#success').hide();
+      $('#dispUsers').click(function(){
+        readData('https://reqres.in/api/users?page=2')
+          .then(function(response){ 
+                  console.log(response);
+                }, function(error){console.error('Oops error occured', error);});
+      });
 
 
       // All custom functions 
       function signupButton() {
         console.log('Signup button clicked');
-        var customerInfo = {};
+        var customerInfo = {};// Object 
         customerInfo.FirstName = $('#fName').val()
         customerInfo.LastName = $('#lName').val();
         customerInfo.Email = $('#inputEmail4').val();
         customerInfo.Password = $('#inputPassword4').val();
+        customerInfo.State = $('#inputState').val();
+
+        var errorMessage = '';
+        if (customerInfo.FirstName == '') {
+          errorMessage = '<li>First Name can not be empty!</li>';
+          $('#fName').css('border-color', 'red');
+        } else {
+          $('#fName').css('border-color', '#ced4da');
+        }
+        if (customerInfo.LastName == '') {
+          errorMessage = errorMessage + '<li>Last Name can not be empty!</li>';
+          $('#lName').css('border-color', 'red');
+        } else {
+          $('#lName').css('border-color', '#ced4da');
+        }
+        if (customerInfo.Email == '') {
+          errorMessage = errorMessage + '<li>Email can not be empty!</li>';
+          $('#inputEmail4').css('border-color', 'red');
+        } else {
+          $('#inputEmail4').css('border-color', '#ced4da');
+        }
+        if (customerInfo.Password == '') {
+          errorMessage = errorMessage + '<li>Password can not be empty!</li>';
+          $('#inputPassword4').css('border-color', 'red');
+        } else {
+          $('#inputPassword4').css('border-color', '#ced4da');
+        }
+        if (customerInfo.State == 'Choose...') {
+          errorMessage = errorMessage + '<li>State can not be empty!</li>';
+          $('#inputState').css('border-color', 'red');
+        } else {
+          $('#inputState').css('border-color', '#ced4da');
+        }
+
+        if (errorMessage != '') {
+          ErrorMessage(errorMessage);
+          return;
+        }
+
         customerInfo.Address = $('#inputAddress').val();
         customerInfo.Address2 = $('#inputAddress2').val();
         customerInfo.City = $('#inputCity').val();
-        customerInfo.State = $('#inputState').val();
+        // customerInfo.State = $('#inputState').val();
         customerInfo.Zip = $('#inputZip').val();
         customerInfo.CheckOut = $('#gridCheck').prop("checked");
 
         console.log('Customer info is ', customerInfo);
 
+        SuccessMessage('Your data is successfully Submitted!');
+
         $('#signupResult').html('<pre>' + JSON.stringify(customerInfo, undefined, 4) + '<pre>')
+      }
+
+      function ErrorMessage(message) {
+        var customMessage =
+          '<div class="alert alert-danger alert-dismissible">' +
+          '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+          '<strong class="d-block">Error!</strong> ' + message + ' </div>';
+        // $('#'+controlId).css('border-color', 'red');
+
+        $('#notification').html(customMessage);
+      }
+      function SuccessMessage(message) {
+        var customMessage =
+          '<div class="alert alert-success alert-dismissible">' +
+          '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+          '<strong>Success!</strong> ' + message + ' </div>';
+
+        $('#notification').html(customMessage);
       }
 
       function cancelButton() {
@@ -162,6 +235,16 @@
         $('#inputZip').val('');
         $('#gridCheck').prop("checked", false);
         $('#signupResult').html('');
+        
+      }
+
+
+      function readData(webAddress) {
+        // var setting = {url: 'https://www.w3schools.com/jquery/demo_test.txt', method: 'GET'};
+        return $.ajax({
+          url: webAddress,
+          method: 'GET' 
+        });
       }
 
       //code ends here 
