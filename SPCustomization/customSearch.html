@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom SharePoint List Search</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  #serchboxArea, #resultTable {
+    width: 50%;
+    margin: auto;
+  }
+  #resultTable {width: 80%;}
+</style>
+
+</head>
+<body>
+
+  <div class="mainContainer mt-5">
+    <div class="input-group mb-3" id="serchboxArea">
+      <div class="input-group-prepend">
+        <select name="fields" id="searchField" class="form-control">
+          <option value="Title">Title</option>
+          <option value="Department">Department</option>
+        </select> 
+      </div>
+      <input type="text" id="searchBox" class="form-control" placeholder="Search...">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+      </div>
+    </div>
+    <div id="resultTable">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Department</th>
+            <th>Expense Date</th>
+            <th>Unit Price ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sample Title</td>
+            <td>Sales</td>
+            <td>7/7/2021</td>
+            <td>$60.00</td>
+          </tr>
+          <tr>
+            <td>Sample Title 2</td>
+            <td>Sales</td>
+            <td>7/7/2021</td>
+            <td>$60.00</td>
+          </tr>
+          <tr>
+            <td>Sample Title 3</td>
+            <td>Sales</td>
+            <td>7/7/2021</td>
+            <td>$60.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</body>
+</html>
