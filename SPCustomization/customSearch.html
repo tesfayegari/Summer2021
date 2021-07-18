@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom SharePoint List Search</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-  #serchboxArea, #resultTable {
-    width: 50%;
-    margin: auto;
-  }
-  #resultTable {width: 80%;}
-</style>
+  <style>
+    #serchboxArea,
+    #resultTable {
+      width: 50%;
+      margin: auto;
+    }
+
+    #resultTable {
+      width: 80%;
+    }
+  </style>
 
 </head>
+
 <body>
 
   <div class="mainContainer mt-5">
@@ -23,7 +29,7 @@
         <select name="fields" id="searchField" class="form-control">
           <option value="Title">Title</option>
           <option value="Department">Department</option>
-        </select> 
+        </select>
       </div>
       <input type="text" id="searchBox" class="form-control" placeholder="Search...">
       <div class="input-group-append">
@@ -40,8 +46,8 @@
             <th>Unit Price ($)</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
+        <tbody id="resultBody">
+          <!-- <tr>
             <td>Sample Title</td>
             <td>Sales</td>
             <td>7/7/2021</td>
@@ -58,11 +64,94 @@
             <td>Sales</td>
             <td>7/7/2021</td>
             <td>$60.00</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
   </div>
-  
+
+
+  <!-- javascript code starts here  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // jQuery document looded
+      //date range filtering SP REST endpoint
+      ///_api/web/Lists/getbytitle('SampleExpense')/items?$filter=ExpenseDate ge datetime'2020-10-01T00:00:00Z' and ExpenseDate le datetime'2020-10-31T00:00:00Z'  
+
+      // var endPoint = "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=ExpenseDate ge datetime'2020-10-01T00:00:00Z' and ExpenseDate le datetime'2020-10-31T00:00:00Z'";
+
+      //search when Title contains the word 'To'
+      // var endPoint = "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('To', Title)";
+
+      //example of serch when department contains 'human'
+      ///_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('human', Department)
+
+      //when button searchButton clicked invoke executeSearch
+
+      var endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items";
+      excuteSearch(endPoint);
+
+      // TODO 
+      $('#searchButton').click(excuteSearch);
+
+
+
+      function excuteSearch() {
+        var searchField = $('#searchField').val();
+        var searchBox = $('#searchBox').val();
+
+        if (searchBox == '') {
+          endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items";
+        } else {
+          if (searchField == 'Title') {
+            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Title)";
+          } else {
+            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Department)";
+          }
+        }
+
+
+        readData(endPoint).then(function (data) {
+          console.log('Successfully Read SharePoint data', data);
+          var items = data.value; //Array of all the items from that rest API
+
+          //var myHtml = itemToHtml(items[0]);
+          var myHtml = '';
+          // Loop through all the items and create the html rows 
+          for (var index in items) {
+            myHtml += itemToHtml(items[index]);
+          }
+
+          $('#resultBody').html(myHtml);
+
+        },
+          function (error) { console.error('Oops error occured', error); });
+      }
+
+
+      function itemToHtml(item) {
+        return '<tr>' +
+          '<td>' + item.Title + '</td>' +
+          '<td>' + item.Department + '</td>' +
+          //'<td>' + item.Department + '</td>' +
+          '<td>' + (new Date(item.ExpenseDate)).format('d') + '</td>' +
+          '<td>$' + item.UnitPrice + '</td>' +
+          '</tr>';
+      }
+
+      function readData(webAddress) {
+        return $.ajax({
+          url: webAddress,
+          method: 'GET',
+          headers: { "Accept": "application/json; odata=nometadata" },
+        });
+      }
+      //end of jQuery documet load
+    });
+  </script>
+  <!-- javascript code ends  here  -->
+
 </body>
+
 </html>
