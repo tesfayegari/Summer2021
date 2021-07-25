@@ -31,7 +31,7 @@
           <option value="Department">Department</option>
         </select>
       </div>
-      <input type="text" id="searchBox" class="form-control" placeholder="Search...">
+      <input type="search" id="searchBox" class="form-control" placeholder="Search...">
       <div class="input-group-append">
         <button class="btn btn-primary" type="button" id="searchButton">Search</button>
       </div>
@@ -40,6 +40,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Title</th>
             <th>Department</th>
             <th>Expense Date</th>
@@ -67,6 +68,17 @@
           </tr> -->
         </tbody>
       </table>
+      <!-- pagination start  -->
+      <div class="container">
+
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a id="prevLink" class="page-link" href="javascript:void(0);">Previous</a></li>
+          <li class="page-item disabled"><a id="pageLabel" class="page-link" href="javascript:void(0);">Page 1</a></li>
+          <li class="page-item"><a id="nextLink" class="page-link" href="javascript:void(0);">Next</a></li>
+        </ul>
+
+      </div>
+      <!-- pagination ends here  -->
     </div>
   </div>
 
@@ -74,6 +86,14 @@
   <!-- javascript code starts here  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+    var searchConfig = {
+      maxCount: 15,
+      nextAPI: undefined,
+      prevAPI: [],
+      currentAPI: undefined,
+      nextLinkClicked: false,
+      currentPage: 1
+    }
     $(document).ready(function () {
       // jQuery document looded
       //date range filtering SP REST endpoint
@@ -89,11 +109,28 @@
 
       //when button searchButton clicked invoke executeSearch
 
-      var endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items";
+      var endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$top=" + searchConfig.maxCount;
       excuteSearch(endPoint);
 
       // TODO 
       $('#searchButton').click(excuteSearch);
+
+      //Next page clicked
+      $('#nextLink').click(function () {
+        searchConfig.nextLinkClicked = true;
+        if (searchConfig.nextAPI) {
+          readDataFromAPI(searchConfig.nextAPI);// make sure next exists 
+          searchConfig.currentPage++;
+        }
+      });
+      //Previous page clicked
+      $('#prevLink').click(function () {
+        searchConfig.nextLinkClicked = false;
+        if (searchConfig.prevAPI.length > 0) {
+          readDataFromAPI(searchConfig.prevAPI.pop());// make sure next exists 
+          searchConfig.currentPage--;
+        }
+      });
 
 
 
@@ -102,18 +139,30 @@
         var searchBox = $('#searchBox').val();
 
         if (searchBox == '') {
-          endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items";
+          endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$top=" + searchConfig.maxCount;
         } else {
           if (searchField == 'Title') {
-            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Title)";
+            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Title)&$top=" + searchConfig.maxCount;
           } else {
-            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Department)";
+            endPoint = _spPageContextInfo.webAbsoluteUrl + "/_api/web/Lists/getbytitle('SampleExpense')/items?$filter=substringof('" + searchBox + "', Department)&$top=" + searchConfig.maxCount;
           }
         }
 
+        readDataFromAPI(endPoint);
+      }
 
+
+      //reusable function 
+      function readDataFromAPI(endPoint) {
         readData(endPoint).then(function (data) {
           console.log('Successfully Read SharePoint data', data);
+          searchConfig.nextAPI = data["odata.nextLink"];
+          if (searchConfig.nextLinkClicked) {
+            searchConfig.prevAPI.push(searchConfig.currentAPI);
+          }
+          searchConfig.currentAPI = endPoint; //to be tested
+
+
           var items = data.value; //Array of all the items from that rest API
 
           //var myHtml = itemToHtml(items[0]);
@@ -124,6 +173,7 @@
           }
 
           $('#resultBody').html(myHtml);
+          $('#pageLabel').html('Page ' + searchConfig.currentPage);
 
         },
           function (error) { console.error('Oops error occured', error); });
@@ -132,6 +182,7 @@
 
       function itemToHtml(item) {
         return '<tr>' +
+          '<td>' + item.ID + '</td>' +
           '<td>' + item.Title + '</td>' +
           '<td>' + item.Department + '</td>' +
           //'<td>' + item.Department + '</td>' +
@@ -140,6 +191,7 @@
           '</tr>';
       }
 
+      //SharePoint 2013 odata=verbose
       function readData(webAddress) {
         return $.ajax({
           url: webAddress,
